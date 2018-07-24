@@ -1,0 +1,99 @@
+<div class="top">
+    <div class="topImage">
+        <img class="mobileImage" src="http://media.philly.com/storage/inquirer/special%20project%20media/summerguide2018-mobile.jpg" alt="">
+        <img class="desktopImage" src="http://media.philly.com/storage/inquirer/special%20project%20media/summerguide2018-2.jpg">
+
+    </div>
+
+    <div class="topText">
+        <h1>Tourist attractions ratings</h1>
+
+
+        <div class="container" alignment="true">
+            <div class="row" alignment="true">
+                <div class="col-md-8 col col-md-offset-2" alignment="true">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+
+
+                    <h5>By Zoe Bean and Claire Wolters</h5>
+                    <div class="dateline" alignment="true">Monday, August 17, 2018</div>
+
+                    {% include "./partials/socialshare.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container bodyContainer" alignment="true">
+    <div class="row" alignment="true">
+        <div class="col-md-8 col col-md-offset-2" alignment="true">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc gravida, arcu sed dignissim vestibulum, risus sapien dignissim tortor, lobortis suscipit erat ante eget sapien. In gravida arcu a nulla dignissim, sit amet ullamcorper lorem consectetur.
+                nec at nunc. Nunc placerat placerat rhoncus. Donec vel luctus sem. Vivamus in nunc tellus. Quisque euismod quam nisl, in cursus ipsum pharetra ut. In ac ullamcorper nisl, sed aliquam nunc. Sed posuere bibendum rhoncus. Morbi nec efficitur
+                augue. Quisque gravida faucibus massa, sit amet convallis tortor eleifend nec.</p>
+
+        </div>
+    </div>
+</div>
+<div class="container bodyContainer" alignment="true">
+    <div class="row" alignment="true">
+        <div class="col-md-10 col col-md-offset-1" alignment="true">
+            <div class="mapcontainer">
+                <div class="map-inner">
+                    <div id="map"></div>
+                </div>
+
+            </div>
+
+
+            <div class="reviewWrapper">
+                {% for item in data %}
+                <div class="reviewItem">
+                    <div class="iconbadge">
+                        <i class="fas fa-certificate"></i>
+                        <span class="iconlabel">{{loop.index}}</span>
+
+
+                    </div>
+                    <h2>{{item.name}}</h2>
+
+                    <div class="flexSection">
+                        <div class="descriptionText">
+                            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                            <div>Address here</div>
+                            <div>Phone # here</div>
+                            <div>
+                                <a href="{{item.website}}">Visit website</a>
+                            </div>
+                        </div>
+                        {# <div class="lilMapSection">
+                            <div class="lilMap" id="lilMap{{loop.index}}">
+
+                            </div>
+                            <a class="googlemaps" href="#">Open in Google Maps <i class="fas fa-external-link-alt"></i></a>
+                        </div> #}
+                    </div>
+
+                    <div class="reviewText">
+
+                        <p class="rtext r1"><strong>Zoe says: </strong>{{item.text1}}</p>
+                        <p class="rtext r2"><strong>Claire says: </strong>{{item.text2}}</p>
+                    </div>
+                    <div class="finalScore">
+                        Final rating: <strong>Worth it <i class="fas fa-thumbs-up"></i></strong>
+                    </div>
+                </div>
+
+                {% if loop.index == 3 %}
+                    {% set ad = ["21"] %} {% include "partials/ad.html" %}
+                {% endif %}
+
+                {% if loop.index == 6 %}
+                    {% set ad = ["22"] %} {% include "partials/ad.html" %}
+                {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
