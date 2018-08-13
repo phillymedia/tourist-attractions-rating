@@ -1,0 +1,44 @@
+<div class="lf-gallery">
+    <div class="image-wrapper">
+        {% for item in photoInfo %}
+        {% if loop.first %}
+        <div class="active gallery-img" data-index="{{loop.index0}}">
+            <img
+                alt="{{item.caption}}"
+                data-index="{{loop.index0}}"
+                class="lazy-load"
+                src="http://media.philly.com/storage/inquirer/special%20project%20media/tourism17/RS{{item.Resource}}_{{item.filename}}?a">
+
+        </div>
+        {% else %}
+
+        <div class="gallery-img" data-index="{{loop.index0}}">
+            <img
+                alt="{{item.caption}}"
+                data-index="{{loop.index0}}"
+                class="lazy-load"
+                data-src="http://media.philly.com/storage/inquirer/special%20project%20media/tourism17/RS{{item.Resource}}_{{item.filename}}?a">
+        </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+        <div class="prev arrow">
+            <i class="prev arrow-icon fa fa-chevron-left" aria-hidden="true">&zwnj;</i>
+        </div>
+        <div class="next arrow">
+            <i class="next arrow-icon fa fa-chevron-right" aria-hidden="true">&zwnj;</i>
+        </div>
+
+    </div>
+
+
+    <div class="newCaption">
+        <div class="index">
+            <img src="http://media.philly.com/binary/camera.svg" alt="Camera icon">
+            <span class="count">1</span> of {{photoInfo.length}}
+        </div>
+        <div class="caption containerPhotoCaption"></div>
+    </div>
+</div>

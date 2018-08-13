@@ -1,22 +1,20 @@
 <div class="top">
     <div class="topImage">
-        <img class="mobileImage" src="http://media.philly.com/storage/inquirer/special%20project%20media/summerguide2018-mobile.jpg" alt="">
-        <img class="desktopImage" src="http://media.philly.com/storage/inquirer/special%20project%20media/summerguide2018-2.jpg">
-
+        <img class="mobileImage" src="http://media.philly.com/images/tourismheader2-mobile.jpg" alt="">
+        <img class="desktopImage" src="http://media.philly.com/images/tourismheader2-desktop.jpg">
     </div>
 
     <div class="topText">
-        <h1>Tourist attractions ratings</h1>
-
+        <h1>Which Philly tourist attractions are worth it? A newcomer and a native debate.</h1>
 
         <div class="container" alignment="true">
             <div class="row" alignment="true">
                 <div class="col-md-8 col col-md-offset-2" alignment="true">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                    {#
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p> #}
 
-
-                    <h5>By Zoe Bean and Claire Wolters</h5>
-                    <div class="dateline" alignment="true">Monday, August 17, 2018</div>
+                    <h5>By Zoe Bean and Claire Wolters<br>Photography by Heather Khalifa</h5>
+                    <div class="dateline" alignment="true">Tuesday, August 14, 2018</div>
 
                     {% include "./partials/socialshare.html" %}
                 </div>
@@ -26,11 +24,17 @@
 </div>
 
 <div class="container bodyContainer" alignment="true">
-    <div class="row" alignment="true">
+    <div class="row mainp" alignment="true">
         <div class="col-md-8 col col-md-offset-2" alignment="true">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc gravida, arcu sed dignissim vestibulum, risus sapien dignissim tortor, lobortis suscipit erat ante eget sapien. In gravida arcu a nulla dignissim, sit amet ullamcorper lorem consectetur.
-                nec at nunc. Nunc placerat placerat rhoncus. Donec vel luctus sem. Vivamus in nunc tellus. Quisque euismod quam nisl, in cursus ipsum pharetra ut. In ac ullamcorper nisl, sed aliquam nunc. Sed posuere bibendum rhoncus. Morbi nec efficitur
-                augue. Quisque gravida faucibus massa, sit amet convallis tortor eleifend nec.</p>
+            <p>Philadelphia &mdash; the city of cheesesteaks, cheesy mascots, and, of course, brotherly love, is not only home to approximately 1.5 million people, it was a destination for approximately&nbsp;<a href="http://files.visitphilly.com/Visit-Philadelphia-Annual-Report-2018.pdf">43 million</a>&nbsp;touristsin 2017. Whether you&rsquo;re touring the city yourself or serving as a Philly aficionado for an out-of-town friend, you&rsquo;ll want to scope out the sights that put the city in the best light, and, well, avoid those that don&rsquo;t.</p>
+            <p>To pull off this tourism marathon, we assembled a team and devised criteria. Representing locals, we have
+                <span class="claire">Claire Wolters</span>
+                &mdash; an art-loving, Temple-repping, warm-weather Eagles fan on the hunt for the hidden gems of Philadelphia attractions. Weighing in as a newcomer is
+                <span class="zoe">Zoe Bean</span>
+                &mdash; Mainer, baby Chicagoan, tall-tower connoisseur, and amateur foodie.</p>
+            <p>How did we decide on the places to visit? Philly has no shortage of tourist destinations, but we stuck to places that have a bar for entry, whether it was a ticket cost or a wait in line (that&rsquo;s why, for example, we didn&rsquo;t visit Spruce
+                Street Harbor Park). We also avoided places that are universally recognized to be worth it, such as the Philadelphia Museum of Art.</p>
+            <p>With a refined list of only the most touristy of tourist traps, we set out to provide a decisive rundown of what you&rsquo;ll love, or not love, in the City of Brotherly Love.</p>
 
         </div>
     </div>
@@ -45,53 +49,126 @@
 
             </div>
 
+            <div class="JumpSection">
+                <div class="topicHead">Jump to a location</div>
+                <div class="jItems">
+                    {% for item in data %}
+                    <a href="#">{{item.name}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            {% set ad = ["22"] %}
+            {% include "partials/ad.html" %}
 
             <div class="reviewWrapper">
                 {% for item in data %}
-                <div class="reviewItem">
-                    <div class="iconbadge">
-                        <i class="fas fa-certificate"></i>
-                        <span class="iconlabel">{{loop.index}}</span>
+                    <div class="reviewItem" id="{{item.name|replace(' ', '-')|replace('.','')|replace('&','and')|replace('’', '')}}">
+                        <div class="iconbadge">
+                            <i class="fa fa-certificate">&zwnj;</i>
+                            <span class="iconlabel">{{loop.index}}</span></div>
+                        <h2>{{item.name}}
+                            {% if item.allRating == "up" %}
+                                <span class="finalScore">
+                                    Thumbs up
+                                    <i class="fa fa-thumbs-up">&zwnj;</i>
+                                </span>
+                            {% elif item.allRating == "middle" %}
+                                <span class="finalScore">
+                                    Toss-up
+                                    <i class="fa fa-thumbs-up tossup" aria-hidden="true">&zwnj;</i>
+                                </span>
 
+                            {% elif item.allRating == "down" %}
+                                <span class="finalScore">
+                                    Thumbs down
+                                    <i class="fa fa-thumbs-down" aria-hidden="true">&zwnj;</i>
+                                </span>
+                            {% endif %}
+                        </h2>
+                        {% set photoInfo = photos[item.image] %}{% include "./partials/gallery.html" ignore missing %}
 
-                    </div>
-                    <h2>{{item.name}}</h2>
+                        <div class="flexSection">
+                            <div class="descriptionText">
+                                {{item.description | safe}}
 
-                    <div class="flexSection">
-                        <div class="descriptionText">
-                            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-                            <div>Address here</div>
-                            <div>Phone # here</div>
-                            <div>
-                                <a href="{{item.website}}">Visit website</a>
+                            </div>
+                            <div class="rightSide">
+                                <div class="addressInfo">{{item.address | safe}}{% if item.phone %}; {{item.phone | safe}}{% endif %}
+                                    {% if item.website %}
+                                        <a href="{{item.website}}">Visit website</a>
+                                    {% endif %}
+
+                                </div>
+
+                                <div class="lilMapSection">
+                                    <div class="lilMap" id="lilMap{{loop.index}}">&zwnj;</div>
+
+                                </div>
+                                {# <a class="googlemaps" href="#">Open in Google Maps
+                                    <i class="fa fa-external-link"></i>
+                                </a> #}
                             </div>
                         </div>
-                        {# <div class="lilMapSection">
-                            <div class="lilMap" id="lilMap{{loop.index}}">
+
+                        <div class="reviewText">
+                            <div class="rtext r1">
+                                <span class="zoe">Zoe says</span>
+                                <span class="indvRating zoe">
+                                    {% if item.zoeRating == "up" %}
+                                        <i class="fa fa-thumbs-up">&zwnj;</i>
+                                    {% elif item.zoeRating == "down" %}
+                                        <i class="fa fa-thumbs-down">&zwnj;</i>
+                                    {% elif item.allRating == "middle" %}
+                                        <i class="fa fa-thumbs-up tossup" aria-hidden="true">&zwnj;</i>
+                                    {% endif %}
+                                </span>{{item.zoe | safe}}</div>
+                            <div class="rtext r2">
+                                <span class="claire">Claire says</span>
+                                <span class="indvRating claire">
+                                    {% if item.claireRating == "up" %}
+                                        <i class="fa fa-thumbs-up">&zwnj;</i>
+                                    {% elif item.claireRating == "down" %}
+                                        <i class="fa fa-thumbs-down">&zwnj;</i>
+                                    {% elif item.allRating == "middle" %}
+                                        <i class="fa fa-thumbs-up tossup" aria-hidden="true">&zwnj;</i>
+                                    {% endif %}
+                                </span>{{item.claire | safe}}</div>
+                        </div>
+
+                        {% if item.name == "Reading Terminal Market" %}
+
+
+                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/GgYAEknfnxg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+                        <div class="videowrapper">
+                            <div class="topicHead">
+                                Click and drag the video to explore in 360°
+                            </div>
+                                <div class="videoTest" id="video360"> &zwnj;</div>
+
+                                <div class="vidControl">
+                                    <i class="fa fa-play-circle" aria-hidden="true">&zwnj;</i>
+                                    <i class="fa fa-pause-circle controlOff" aria-hidden="true">&zwnj;</i>
+                                </div>
+                            <div class="vidicon">
+                                360°<i class="fa fa-arrows" aria-hidden="true">&zwnj;</i>
 
                             </div>
-                            <a class="googlemaps" href="#">Open in Google Maps <i class="fas fa-external-link-alt"></i></a>
-                        </div> #}
+                        </div>
+                        {% endif %}
+
                     </div>
 
-                    <div class="reviewText">
-
-                        <p class="rtext r1"><strong>Zoe says: </strong>{{item.text1}}</p>
-                        <p class="rtext r2"><strong>Claire says: </strong>{{item.text2}}</p>
-                    </div>
-                    <div class="finalScore">
-                        Final rating: <strong>Worth it <i class="fas fa-thumbs-up"></i></strong>
-                    </div>
-                </div>
-
-                {% if loop.index == 3 %}
-                    {% set ad = ["21"] %} {% include "partials/ad.html" %}
-                {% endif %}
-
-                {% if loop.index == 6 %}
-                    {% set ad = ["22"] %} {% include "partials/ad.html" %}
-                {% endif %}
-
+                    {% if loop.index == 3 %}
+                        {% set ad = ["22"] %}
+                        {% include "partials/ad.html" %}
+                    {% endif %}
+                    {% if loop.index == 6 %}
+                        {% set ad = ["23"] %}
+                        {% include "partials/ad.html" %}
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

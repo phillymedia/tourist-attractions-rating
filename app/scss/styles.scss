@@ -1,6 +1,6 @@
 @import 'longform-styles';
 @import 'philly-styles/values';
-$color: #239dd9;
+@import "gallery";
 
 .topText {
     margin-left: auto;
@@ -20,6 +20,20 @@ $color: #239dd9;
     };
 }
 
+.col p {
+    a {
+        color: #555;
+        text-decoration: underline;
+        box-shadow: none;
+
+        &:hover {
+            background: rgba($color,0.5);
+            text-decoration: none;
+            box-shadow: none;
+        }
+    }
+}
+
 .top {
     text-align: center;
     // margin: 15px;
@@ -33,25 +47,36 @@ $color: #239dd9;
 
     h5 {
         font-family: $philly-sans;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1.6em;
     }
 
     h1 {
-        font-size: 65px;
+        font-size: 53px;
         font-family: $philly-sans;
+        letter-spacing: -1px;
         font-weight: 100;
         margin-top: 65px;
         margin-bottom: 40px;
+        max-width: 950px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.3em;
         @extend %topmargin;
+        padding-left: 15px;
+        padding-right: 15px;
         color: #222;
         @include tablet {
-            font-size: 55px;
+            font-size: 50px;
             margin-top: 45px;
             margin-bottom: 40px;
         };
         @include mobile {
-            font-size: 45px;
+            font-size: 40px;
             margin-top: 35px;
             margin-bottom: 30px;
+            letter-spacing: normal;
         };
     }
 
@@ -91,7 +116,10 @@ $color: #239dd9;
 .mapcontainer {
     position: relative;
     padding: 30px 0;
-    background: gray;
+    background: white;
+    @include BS-large {
+        margin: 0 -50px 30px;
+    };
 
     .map-inner {
         padding-bottom: 50%;
@@ -105,6 +133,7 @@ $color: #239dd9;
         bottom: 0;
         width: 100%;
         height: 100%;
+        // border: 2px solid $color;
     }
 }
 
@@ -124,22 +153,23 @@ $color: #239dd9;
         left: 50%;
         top: 50%;
         font-size: 13px;
-        color: white;
+        color: black;
         text-align: center;
         @include transform(translate(-50%, -50%));
         line-height: 1;
     }
 
-    .fas {
+    .fa {
         font-size: 22px;
-        filter: drop-shadow(0px 2px 0px darken($color, 10%));
+        filter: drop-shadow(1px 1px 0px darken($color, 15%));
     }
 }
 
 .icon2 {
     @extend .icon;
     color: black;
-    .fas {
+
+    .fa {
         font-size: 30px;
         filter: none;
     }
@@ -148,8 +178,8 @@ $color: #239dd9;
 .iconbadge {
     @extend .icon;
     float: left;
-    margin-top: 4px;
-    @include transform(scale(1.2));
+    margin-top: 8px;
+    @include transform(scale(1.5));
     margin-right: 10px;
 }
 
@@ -157,8 +187,20 @@ $color: #239dd9;
     padding: 50px 0;
 
     .reviewItem {
-        padding-bottom: 50px;
+        padding-bottom: 70px;
         font-family: $philly-sans;
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 32px;
+            position: relative;
+            @include mobile {
+                font-size: 26px;
+            };
+        }
+        @include tablet {
+            padding-bottom: 40px;
+        };
     }
 
     .flexSection {
@@ -166,22 +208,81 @@ $color: #239dd9;
         align-items: stretch;
         align-content: stretch;
         margin-bottom: 30px;
+        margin-top: 15px;
+        @include tablet {
+            flex-wrap: wrap;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        };
+        @include mobile {
+            margin-top: 25px;
+        };
     }
 
     .descriptionText {
-        font-size: 15px;
-        line-height: 1.4em;
+        font-size: 16px;
+        line-height: 1.5em;
         @include flex(1 1 50%);
-        padding-bottom: 15px;
-
-        div {
-            max-width: 550px;
+        font-family: $philly-sans;
+        color: black;
+        // padding-bottom: 15px;
+        p {
+            font-size: 16px;
+            line-height: 1.5em;
+            font-family: $philly-sans;
+            margin-bottom: 0;
         }
+        @include mobile {
+            order: 2;
+        };
+    }
+
+    .rightSide {
+        @include flex(0 0 220px);
+        position: relative;
+        margin-left: 50px;
+
+        a {
+            color: #555;
+            text-decoration: underline;
+
+            &:hover {
+                background: rgba($color,0.5);
+                text-decoration: none;
+            }
+        }
+
+        .addressInfo {
+            font-size: 14px;
+            font-weight: 300;
+            display: block;
+            padding-bottom: 5px;
+
+            a {
+                display: block;
+                @include mobile {
+                    display: inline-block;
+                    margin-left: 8px;
+                };
+            }
+        }
+        @include mobile {
+            order: 1;
+            margin: 0;
+            padding: 0;
+            @include flex(1 1 100%);
+            margin-bottom: 20px;
+        };
     }
 
     .lilMapSection {
-        @include flex(1 0 200px);
         position: relative;
+        min-height: 150px;
+        @include mobile {
+            @include flex(1 1 100%);
+            margin: 5px 0 0;
+            min-height: 0;
+        };
 
         .lilMap {
             background: #eee;
@@ -190,77 +291,351 @@ $color: #239dd9;
             right: 0;
             bottom: 0;
             top: 0;
+            @include mobile {
+                display: none;
+            };
         }
     }
+
     .googlemaps {
-        position: absolute;
-        top: 0;
-        @include transform(translateY(-100%));
-        right: 0;
+        display: block;
+        // position: absolute;
+        // top: 0;
+        // @include transform(translateY(-100%));
+        // right: 0;
         font-size: 14px;
         font-weight: bold;
         color: #333;
-        padding-bottom: 3px;
+        padding-top: 5px;
+        @include mobile {
+            position: relative;
+            @include transform(none);
+            padding: 0;
+        };
     }
 
     .reviewText {
         @include display-flex;
         flex-wrap: wrap;
+        margin-top: 40px;
         padding-top: 15px;
         position: relative;
-        @include tablet {};
+        // background: rgba(#fff8dc,0.5);
+        // padding: 22px;
+        // margin-left: -30px;
+        // margin-right: -30px;
+        margin-bottom: 30px;
+        border-radius: 4px;
+        @include tablet {
+            margin-top: 10px;
+        };
 
-        p.rtext {
-            font-family: $philly-serif;
-            font-size: 18px;
-            line-height: 1.6em;
+        .rtext {
+            font-family: $philly-sans;
+            font-size: 16px;
+            line-height: 1.5em;
             @include flex(1 1 45%);
-            @include tablet {
-                @include flex(1 1 100%) font-size: 16px;
-                line-height: 1.5em;
-            };
+            margin-bottom: 0 !important;
+            position: relative;
+            font-weight: 200;
+            color: #777;
 
-            strong {
+            p {
                 font-family: $philly-sans;
-                text-transform: uppercase;
-                color: darken($color, 10%);
-                border-bottom: 2px solid rgba($color,0.5);
-                margin-right: 5px;
+                font-size: 16px;
+                line-height: 1.5em;
+                margin-bottom: 0 !important;
+                font-weight: 200;
+                color: #777;
+                margin-bottom: 8px !important;
             }
 
-            &:first-child {
-                padding-right: 15px;
-                @include tablet {
+            span {
+                font-size: 20px;
+                display: block;
+                margin: -15px -15px 15px;
+                padding-top: 4px;
+                padding-bottom: 4px;
+                position: absolute;
+                top: 0;
+                margin: 0;
+                padding: 0;
+                @include transform(translateY(-100%));
+                @include mobile {
+                    font-size: 17px;
+                    position: relative;
+                    transform: none;
                     padding: 0;
+                    margin: 0;
+                    padding-bottom: 15px;
+                };
+                // @include tablet {
+                //     display: inline-block;
+                //     margin-bottom: 5px;
+                //     border: none;
+                // };
+            }
+
+            .indvRating {
+                font-size: 32px;
+                display: block;
+                padding: 0;
+                margin: 0;
+                position: absolute;
+                bottom: 6px;
+                right: 6px;
+                top: unset;
+                z-index: 100;
+                transform: none;
+                opacity: 0.7;
+
+                .fa {
+                    filter: drop-shadow(2px 1px 0px darken($zoe, 15%));
                 }
+
+                &.claire {
+                    .fa {
+                        filter: drop-shadow(2px 1px 0px darken($claire, 15%));
+                    }
+                }
+                @include tablet {
+                    top: -6px;
+                    opacity: 1;
+                    padding: 5px 7px;
+                    font-size: 24px;
+                    left: calc(50% - 15px);
+                    background: white;
+                    border: 2px solid $zoe;
+                    border-radius: 100px;
+                    right: unset;
+                    bottom: unset;
+                    @include transform(translateY(-50%));
+
+                    &.claire {
+                        border: 2px solid $claire;
+                    }
+                };
+            }
+            @include tablet {
+                @include flex(1 1 100%);
+                font-size: 16px;
+                line-height: 1.5em;
+                margin-bottom: 30px !important;
+            };
+
+            &:first-child {
+                margin-right: 5px;
+                border: 2px solid rgba($zoe,0.5);
+                padding: 17px;
+                @include tablet {
+                    margin-right: inherit;
+                    border: none;
+                    border-top: 2px solid $zoe;
+                }
+                @include mobile {}
             }
 
             &:last-child {
-                padding-left: 15px;
+                margin-left: 5px;
+                border-right: 2px solid white;
+                border: 2px solid rgba($claire,0.5);
+                padding: 17px;
                 @include tablet {
-                    padding: 0;
+                    margin-left: inherit;
+                    border: none;
+                    border-top: 2px solid $claire;
+                    margin-bottom: 0px !important;
+                }
+                @include mobile {}
+            }
+        }
+    }
+}
+
+.finalScore {
+    font-size: 20px;
+    font-family: $philly-sans;
+    text-transform: lowercase;
+    font-weight: 100;
+    padding: 3px 5px 0;
+    text-align: center;
+    margin-left: 35px;
+    z-index: 100;
+    font-family: Special Elite;
+    color: #666;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 15px;
+    @include transform(scale(1.5) rotate(4deg));
+    border: 3px solid rgba($color,0.7);
+    border-radius: 4px;
+
+    .fa {
+        color: $color;
+        font-size: 120%;
+        filter: drop-shadow(1px 1px 0px darken($color, 15%));
+    }
+    @include tablet {
+        @include transform(scale(1.4) rotate(4deg));
+    };
+    @include mobile {
+        font-size: 16px;
+        background: rgba(white,0.90);
+        @include transform(scale(1) rotate(-3deg) translateY(88%));
+        bottom: 0;
+        top: inherit;
+        right: -5px;
+    };
+}
+
+.claire,
+.zoe {
+    font-family: $philly-sans;
+    text-transform: uppercase;
+    padding: 1px 4px;
+    color: $zoe;
+    text-align: center;
+    font-weight: bold;
+}
+
+.claire {
+    color: $claire;
+}
+
+div.leaflet-popup-content-wrapper {
+    border-radius: 3px;
+    font-family: $philly-sans;
+    font-size: 13px;
+
+    .name {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    a {
+        color: gray;
+    }
+
+    .markerScroll {
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding-top: 6px;
+        margin-top: 6px;
+        border-top: 1px solid $color;
+        text-align: center;
+        cursor: pointer;
+
+        a {
+            color: $color;
+        }
+    }
+}
+
+.tossup {
+    @include transform(rotate(-90deg) translateY(-10%));
+}
+
+.JumpSection {
+    font-family: $philly-sans;
+    margin: 20px 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .jItems {
+        text-align: center;
+
+        a {
+            display: inline-block;
+            padding: 0 10px 10px;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+
+            &:hover {
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: -2px;
+                    bottom: 8px;
+                    left: -2px;
+                    right: -2px;
+                    background: rgba($color, 0.5);
+                    z-index: -1;
+                    border-radius: 4px;
                 }
             }
         }
     }
 }
 
-
-.finalScore {
-    font-size: 20px;
-    font-family: $philly-sans;
+.topicHead {
+    text-align: center;
+    padding-bottom: 10px;
     text-transform: uppercase;
     font-weight: 100;
-    padding: 10px 0;
+    color: #666;
+    letter-spacing: 1px;
+}
 
-     strong {
-         font-weight: 900;
+.videowrapper {
+    width: 100%;
+    display: block;
+    position: relative;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 25px;
+    display: none;
 
-         .fas {
-             color: $color;
-             font-size: 120%;
-             margin-left: 5px;
-         }
+    @include tablet {
+        padding-top: 0;
+        margin-top: -20px;
+    };
 
-     }
+    .videoTest {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .vidControl {
+        position: absolute;
+        font-family: $philly-sans;
+        font-weight: 900;
+        color: rgba(white,0.6);
+        left: 10px;
+        bottom: 8px;
+        text-align: center;
+        filter: drop-shadow(1px 2px 1px rgba(black,0.8));
+        font-size: 32px;
+
+        &:hover {
+            color: white;
+            cursor: pointer;
+        }
+
+    }
+
+    .controlOff {
+        display: none;
+    }
+
+    .vidicon {
+        position: absolute;
+        font-family: $philly-sans;
+        font-weight: 900;
+        color: white;
+        right: 8px;
+        bottom: 15px;
+        text-align: center;
+        font-size: 18px;
+        filter: drop-shadow(1px 2px 1px rgba(black,0.8));
+
+        i {
+            display: block;
+        }
+    }
 }

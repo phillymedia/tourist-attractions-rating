@@ -358,7 +358,7 @@ html {
     font-family: $philly-sans;
 }
 
-p {
+.mainp p {
     font-family: $philly-serif;
     margin-bottom: 1.25em !important;
     font-size: 18px;
@@ -577,10 +577,10 @@ p {
 
 }
 .containerMedia {
-    margin: 10px auto 20px auto;
+    margin: 10px auto 70px auto;
 
     @include tablet {
         margin-top: 0;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
     };
 }

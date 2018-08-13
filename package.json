@@ -35,6 +35,9 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "babelify": "^8.0.0",
+    "hammerjs": "^2.0.8",
+    "jquery-hammerjs": "^2.0.0",
+    "kaleidoscopejs": "^1.0.17",
     "nunjucks": "^3.0.1"
   }
 }
