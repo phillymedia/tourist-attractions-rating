@@ -209,6 +209,8 @@ $(document).ready(function() {
 
     $(".active").next(".gallery-img").addClass("post-active right")
 
+    var viewer;
+
     if ($(".reviewText").width() > 800) {
         var videoWidth = 800
     } else {
@@ -219,7 +221,7 @@ $(document).ready(function() {
     viewer = new Kaleidoscope.Video({source: 'http://media.philly.com/storage/inquirer/special%20project%20media/tourism17/RS1252475_ReadingTerminal.mp4', containerId: '#video360', loop: true, height: videoHeight, width: videoWidth, autoplay: false});
     viewer.render();
 
-    var viewer;
+
 
     $(window).on('resize', function() {
 
